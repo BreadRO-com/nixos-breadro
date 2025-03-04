@@ -18,15 +18,18 @@
     kernel.sysctl = {
       "kernel.dmesg_restrict" = 1;
     };
-    loader = {
-      efi = {
-        canTouchEfiVariables = true;
-      };
-      systemd-boot.enable = true;
+    loader.grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
     };
   };
 
   services.openssh.enable = true;
+
+  environment.systemPackages = map lib.lowPrio [
+    pkgs.curl
+    pkgs.gitMinimal
+  ];
 
   users.users = {
     root.openssh.authorizedKeys.keys = [
