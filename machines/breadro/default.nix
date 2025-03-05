@@ -79,6 +79,33 @@
     algorithm = "zstd";
   };
 
+  # Get IPv6 config from Debian: /usr/lib/systemd/system/networking.service
+  networking.useNetworkd = true;
+  systemd.network = {
+    enable = true;
+    config.networkConfig = {
+      SpeedMeter = true;
+    };
+    networks = {
+      "01-lo" = {
+        matchConfig.Name = "lo";
+        networkConfig = {
+          LinkLocalAddressing = "ipv6";
+          Address = "127.0.0.1/8";
+        };
+      };
+      "50-ens5" = {
+        matchConfig.Name = "ens5";
+        networkConfig = {
+          DHCP = "ipv4";
+          LinkLocalAddressing = "ipv6";
+          Address = "2402:4e00:1420:1400:6c26:d174:a00e:0/128";
+          Gateway = "fe80::feee:ffff:feff:ffff";
+        };
+      };
+    };
+  };
+
   time.timeZone = "Asia/Shanghai";
   system.stateVersion = "24.11";
 }
