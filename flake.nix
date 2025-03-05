@@ -14,10 +14,10 @@
       ...
     }:
     {
-      nixosConfigurations.production = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.breadro = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         system = "x86_64-linux";
-        modules = [ ./machines/production ];
+        modules = [ ./machines/breadro ];
       };
     };
 }

@@ -37,5 +37,6 @@
     };
   };
 
+  networking.hostName = "breadro";
   system.stateVersion = "24.11";
 }
