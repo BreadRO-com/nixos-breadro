@@ -24,10 +24,10 @@
 
   environment.enableAllTerminfo = true;
 
-  hardware.enableRedistributableFirmware = lib.mkDefault true;
   services ={
     openssh.enable = true;
     qemuGuest.enable = true;
+    fail2ban.enable = true;
   };
 
   users.users = {
@@ -79,5 +79,6 @@
     algorithm = "zstd";
   };
 
+  time.timeZone = "Asia/Shanghai";
   system.stateVersion = "24.11";
 }
