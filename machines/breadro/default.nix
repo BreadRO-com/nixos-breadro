@@ -22,8 +22,13 @@
     };
   };
 
+  environment.enableAllTerminfo = true;
+
   hardware.enableRedistributableFirmware = lib.mkDefault true;
-  services.openssh.enable = true;
+  services ={
+    openssh.enable = true;
+    qemuGuest.enable = true;
+  };
 
   users.users = {
     excalibur = {
@@ -37,6 +42,42 @@
     };
   };
 
-  networking.hostName = "breadro";
+  networking = {
+    hostName = "breadro";
+  };
+
+  nix = {
+    gc = {
+      automatic = true;
+      persistent = true;
+      options = "--delete-older-than 7d";
+    };
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+      substituters = lib.mkBefore [
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
+        "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
+        "https://mirror.sjtu.edu.cn/nix-channels/store"
+      ];
+      trusted-users = [
+        "root"
+        "@wheel"
+      ];
+      http2 = false;
+    };
+  };
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+  };
+
   system.stateVersion = "24.11";
 }
