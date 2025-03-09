@@ -85,8 +85,38 @@
     algorithm = "zstd";
   };
 
-  # Get IPv6 config from Debian: /usr/lib/systemd/system/networking.service
-  networking.useNetworkd = true;
+  networking = {
+    nftables.enable = true;
+    firewall.allowedUDPPorts = [
+      51820 # WireGuard
+    ];
+    useNetworkd = true;
+    wireguard.interfaces = {
+      wg0 = {
+        ips = [ "10.1.0.1/24" "fdbe::1/64" ];
+        listenPort = 51820;
+        mtu = 1280;
+        privateKeyFile = "/var/lib/wireguard/wg0.key";
+        peers = [
+          {
+            publicKey = "T8RsOpzg6HInLTcQA9uev95KPZohQ2GE7JZv84Q2QTk="; #Excalibur
+            allowedIPs = [ 
+              "10.1.0.2/32"
+              "fdbe::2/128"
+            ];
+          }
+          {
+            publicKey = "LL+UbTvE6JbIFX8SCp9upjaKqZGnho6uSZ8bVQ41ZG8="; # Bread
+            allowedIPs = [ 
+              "10.1.0.3/32"
+              "fdbe::3/128"
+            ];
+          }
+        ];
+      };
+    };
+  };
+
   systemd.network = {
     enable = true;
     config.networkConfig = {
@@ -105,6 +135,7 @@
         networkConfig = {
           DHCP = "ipv4";
           LinkLocalAddressing = "ipv6";
+          # Get IPv6 config from Debian: /usr/lib/systemd/system/networking.service
           Address = "2402:4e00:1420:1400:6c26:d174:a00e:0/128";
           Gateway = "fe80::feee:ffff:feff:ffff";
         };
