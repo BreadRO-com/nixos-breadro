@@ -24,10 +24,43 @@
 
   environment.enableAllTerminfo = true;
 
+  security.acme = {
+    defaults.email = "breadro.com@outlook.com";
+    acceptTerms = true;
+    certs."_".domain = "breadro.com";
+  };
+
   services ={
     openssh.enable = true;
     qemuGuest.enable = true;
     fail2ban.enable = true;
+    zammad = {
+      enable = true;
+      secretKeyBaseFile = "/var/lib/zammad/secrets/secretKeyBase";
+    };
+    nginx = {
+      enable = true;
+      recommendedOptimisation = true;
+      recommendedTlsSettings = true;
+      recommendedBrotliSettings = true;
+      recommendedGzipSettings = true;
+      recommendedZstdSettings = true;
+      recommendedProxySettings = true;
+      virtualHosts = let
+        https = host: host // {
+          enableACME = true;
+          forceSSL = true;
+          kTLS = true;
+        };
+        http = host: host // {
+          rejectSSL = true;
+        }; in {
+        "_" = https { locations = {
+          "/".return = "404";
+        };};
+        "zammad.breadro.com" = https { locations."/".proxyPass = "http://127.0.0.1:3000/"; };
+        };
+      };
   };
 
   users.users = {
@@ -87,9 +120,15 @@
 
   networking = {
     nftables.enable = true;
-    firewall.allowedUDPPorts = [
-      51820 # WireGuard
-    ];
+    firewall = {
+      allowedUDPPorts = [
+        51820 # WireGuard
+      ];
+      allowedTCPPorts = [
+        80 # nginx
+        443 # nginx
+      ];
+    };
     useNetworkd = true;
     wireguard.interfaces = {
       wg0 = {
