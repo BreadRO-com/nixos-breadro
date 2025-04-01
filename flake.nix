@@ -12,12 +12,20 @@
       nixpkgs,
       disko,
       ...
-    }:
-    {
+    }: let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+      };
+      hesk = pkgs.callPackage ./packages/hesk {};
+    in {
       nixosConfigurations.breadro = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        system = "x86_64-linux";
+        specialArgs = { inherit inputs system; };
         modules = [ ./machines/breadro ];
+      };
+      packages."${system}" = {
+        default = hesk;
+        hesk = hesk;
       };
     };
 }
