@@ -10,6 +10,7 @@
     inputs.disko.nixosModules.disko
     ./disko.nix
     ./hardware-configuration.nix
+    ./test-account.nix
   ];
 
   boot = {
