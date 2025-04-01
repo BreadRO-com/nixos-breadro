@@ -34,10 +34,6 @@
     openssh.enable = true;
     qemuGuest.enable = true;
     fail2ban.enable = true;
-    zammad = {
-      enable = true;
-      secretKeyBaseFile = "/var/lib/zammad/secrets/secretKeyBase";
-    };
     nginx = {
       enable = true;
       recommendedOptimisation = true;
@@ -58,7 +54,6 @@
         "_" = https { locations = {
           "/".return = "404";
         };};
-        "zammad.breadro.com" = https { locations."/".proxyPass = "http://127.0.0.1:3000/"; };
         };
       };
   };
