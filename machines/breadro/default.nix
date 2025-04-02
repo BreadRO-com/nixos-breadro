@@ -11,6 +11,7 @@
     ./disko.nix
     ./hardware-configuration.nix
     ./test-account.nix
+    ./hesk.nix
   ];
 
   boot = {

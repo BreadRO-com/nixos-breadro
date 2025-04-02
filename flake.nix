@@ -9,6 +9,7 @@
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
       disko,
       ...
