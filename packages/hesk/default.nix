@@ -1,6 +1,8 @@
 { lib
 , stdenvNoCC
 , fetchFromGitHub
+, stateDir ? null
+, removeInstall ? true
 }:
 
 let
@@ -27,6 +29,15 @@ stdenvNoCC.mkDerivation {
 
     mkdir -p $out/share/hesk
     cp -r . $out/share/hesk
+
+  '' + lib.optionalString (stateDir != null) ''
+    for i in attachments cache hesk_settings.inc.php; do
+      rm -rf $out/share/hesk/$i
+      ln -s ${stateDir}/$i $out/share/hesk/$i
+    done
+  '' + lib.optionalString removeInstall ''
+    rm -rf $out/share/hesk/install
+  '' + ''
 
     runHook postInstall
   '';
