@@ -28,6 +28,7 @@
       packages."${system}" = {
         default = hesk;
         hesk = hesk;
+        hesk-zh_cmn_hans = pkgs.callPackage ./packages/hesk-zh_cmn_hans {};
       };
     };
 }
