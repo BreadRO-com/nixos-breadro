@@ -60,6 +60,7 @@
       '';
       root = "${inputs.self.packages.${system}.hesk.override {
         stateDir = "/var/lib/hesk";
+        langPack = inputs.self.packages.${system}.hesk-zh_cmn_hans;
         # removeInstall = false;
       }}/share/hesk/";
       locations = {

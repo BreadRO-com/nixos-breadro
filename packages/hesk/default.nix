@@ -3,6 +3,7 @@
 , fetchFromGitHub
 , stateDir ? null
 , removeInstall ? true
+, langPack ? null
 }:
 
 let
@@ -37,6 +38,9 @@ stdenvNoCC.mkDerivation {
     done
   '' + lib.optionalString removeInstall ''
     rm -rf $out/share/hesk/install
+  '' + ''
+  '' + lib.optionalString (langPack != null) ''
+    cp -r ${langPack}/share/hesk/language/* $out/share/hesk/language/
   '' + ''
 
     runHook postInstall
