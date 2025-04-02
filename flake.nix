@@ -17,11 +17,12 @@
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
+        config.allowUnfree = true;
       };
       hesk = pkgs.callPackage ./packages/hesk {};
     in {
       nixosConfigurations.breadro = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs system; };
+        specialArgs = { inherit inputs system pkgs; };
         modules = [ ./machines/breadro ];
       };
       packages."${system}" = {
