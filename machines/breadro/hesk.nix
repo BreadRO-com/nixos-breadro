@@ -54,6 +54,12 @@
     http = host: host // {
       rejectSSL = true;
     }; in {
+    "breadro.com" = https { locations = {
+      "/".return = "301 https://cs.breadro.com";
+    };};
+    "www.breadro.com" = https { locations = {
+      "/".return = "301 https://cs.breadro.com";
+    };};
     "cs.breadro.com" = https {
       extraConfig = ''
         index index.php;
