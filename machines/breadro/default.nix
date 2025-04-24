@@ -62,6 +62,9 @@
           };
         };
         "dl.breadro.com" = https {
+          serverAliases = [
+            "dl-cdn.breadro.com"
+          ];
           locations = {
             "/" = {
               root = "/srv/dl";
@@ -211,6 +214,13 @@
             allowedIPs = [ 
               "10.1.0.3/32"
               "fdbe::3/128"
+            ];
+          }
+          {
+            publicKey = "5FmrArolI4v240v5MnMA7XmYXjSFDmIhtT3GmmxKwiY="; # BreadRO
+            allowedIPs = [ 
+              "10.1.0.4/32"
+              "fdbe::4/128"
             ];
           }
         ];
