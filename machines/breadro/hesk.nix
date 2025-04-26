@@ -35,6 +35,12 @@
           "hesk.*" = "ALL PRIVILEGES";
         };
       }
+      { 
+        name = "excalibur";
+        ensurePermissions = {
+          "*.*" = "ALL PRIVILEGES";
+        };
+      }
     ];
   };
 
