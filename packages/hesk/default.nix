@@ -8,7 +8,7 @@
 
 let
     pname = "hesk";
-    version = "0-unstable-2025-04-26";
+    version = "0-unstable-2025-04-27";
 in
 
 stdenvNoCC.mkDerivation {
@@ -18,8 +18,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "BreadRO-com";
     repo = pname;
-    rev = "c2e2996477ef402d88214b7bc5d12612c2cd0c58";
-    hash = "sha256-D3ywbIWSfB6jLwmLhxSC+se8LBj51miZ/V+WQoJwIYE=";
+    rev = "15c8c5f746415d6063ee2e58496649f04550d51a";
+    hash = "sha256-ViUTE6e66tVwl2Z9gXsZbYq8RVOiG6+xJ06bY1v81qo=";
   };
 
   # There's nothing to build.
