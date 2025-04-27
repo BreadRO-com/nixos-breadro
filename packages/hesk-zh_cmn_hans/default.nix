@@ -1,6 +1,6 @@
 { lib
 , stdenvNoCC
-, fetchzip
+, fetchFromGitHub
 }:
 
 let
@@ -13,11 +13,11 @@ stdenvNoCC.mkDerivation {
   pname = pname;
   version = version;
 
-  src = fetchzip {
-    url = "https://www.hesk.com/language/download.php?tag=${lang}&version=${version}";
-    extension = "zip";
-    stripRoot = false;
-    hash = "sha256-9WHiqsfpcITkEW+PDEFqQxQBUt4Yny7JU4Eo8yKL4rM=";
+  src = fetchFromGitHub {
+    owner = "BreadRO-com";
+    repo = pname;
+    rev = "faea26dfe6bfad2b668e14e0bd42c5268f4131b1";
+    hash = "sha256-A7Rpbinfr3LYekQTQQW7KXfWPy50skQkkbXOjf5pOto=";
   };
 
   # There's nothing to build.
