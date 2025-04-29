@@ -45,13 +45,18 @@
       recommendedZstdSettings = true;
       recommendedProxySettings = true;
       virtualHosts = let
-        https = host: host // {
+        ssl = {
           enableACME = true;
-          forceSSL = true;
           kTLS = true;
         };
-        http = host: host // {
+        https = host: host // ssl // {
+          forceSSL = true;
+        };
+        http = host: host // ssl // {
           rejectSSL = true;
+        };
+        http_https = host: host // ssl // {
+          addSSL = true;
         };
       in {
         "_" = https {
@@ -61,7 +66,7 @@
             };
           };
         };
-        "dl.breadro.com" = https {
+        "dl.breadro.com" = http_https {
           serverAliases = [
             "dl-cdn.breadro.com"
           ];

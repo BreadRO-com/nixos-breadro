@@ -52,13 +52,18 @@
   ];
 
   services.nginx.virtualHosts = let
-    https = host: host // {
+    ssl = {
       enableACME = true;
-      forceSSL = true;
       kTLS = true;
     };
-    http = host: host // {
+    https = host: host // ssl // {
+      forceSSL = true;
+    };
+    http = host: host // ssl // {
       rejectSSL = true;
+    };
+    http_https = host: host // ssl // {
+      addSSL = true;
     }; in {
     "breadro.com" = https { locations = {
       "/".return = "301 https://cs.breadro.com";
