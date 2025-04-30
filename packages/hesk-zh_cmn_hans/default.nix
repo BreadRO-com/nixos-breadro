@@ -6,7 +6,7 @@
 let
     lang = "zh_cmn_hans";
     pname = "hesk-${lang}";
-    version = "3.5";
+    version = "0-unstable-2025-04-30";
 in
 
 stdenvNoCC.mkDerivation {
@@ -16,8 +16,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "BreadRO-com";
     repo = pname;
-    rev = "faea26dfe6bfad2b668e14e0bd42c5268f4131b1";
-    hash = "sha256-A7Rpbinfr3LYekQTQQW7KXfWPy50skQkkbXOjf5pOto=";
+    rev = "ee2d00e842d8cffb625cdd5bc8f627e4d9ae5aaf";
+    hash = "sha256-35PMsC6vhFl2BHGUYoyw4xf22QKqtXuqAvCTtfLjOaA=";
   };
 
   # There's nothing to build.
