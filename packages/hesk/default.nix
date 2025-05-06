@@ -18,8 +18,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "BreadRO-com";
     repo = pname;
-    rev = "42c0122eb5ae420f23c2b26b52a5e130a1ea9d16";
-    hash = "sha256-etmeCZFFeebk/nJUKodM0mXIeQg8gOHnE7dpmlYzN9o=";
+    rev = "dbd95febb8786f5024f9fe604eebb7501f7a8e77";
+    hash = "sha256-0KqZkis6Z3NOyiIttvf25KvICKwEkSOkkcuCGkd33iw=";
   };
 
   # There's nothing to build.
